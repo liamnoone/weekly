@@ -1,0 +1,37 @@
+<h2>Add a new goal for week <%= week.week %></h2>
+
+<% unless params.valid? %>
+  <div class="errors">
+    <h3>There was an error when adding your goal for the week</h3>
+    <ul>
+      <% params.errors.each do |param| %>
+        <li><%= param.attribute_name %> is required</li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%=
+  form_for :goal, routes.goals_path do
+    hidden_field :week_id, value: week.id
+
+    div class: 'input goal' do
+      label :name
+      text_field :name
+    end
+
+    div class: 'input goal' do
+      label :description
+      text_field :description
+    end
+
+    div class: 'input goal' do
+      label :status
+      text_field :status
+    end
+
+    div class: 'input goal submit' do
+      submit 'Add Goal'
+    end
+  end
+%>

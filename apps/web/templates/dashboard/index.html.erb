@@ -1,0 +1,13 @@
+<% if current_week.goals.any? %>
+  <div class="goals">
+    <% current_week.goals.each do |goal| %>
+      <div class="goal">
+        Goal: <%= goal.name %> | Status: <%= goal.status %> | <a href="<%= routes.edit_goal_path(id: goal.id) %>">Edit</a> | <a href="<%= routes.goal_path(id: goal.id) %>">More Information</a>
+      </div>
+    <% end %>
+  </div>
+
+  <a href="<%= routes.new_goal_path(week_id: current_week.id) %>">Add New Goal</a>
+<% else %>
+  You haven't entered any goals this week. <a href="<%= routes.new_goal_path(week_id: current_week.id) %>">Click here to add one</a>
+<% end %>
