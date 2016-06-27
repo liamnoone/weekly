@@ -1,6 +1,11 @@
 require 'rake'
 require 'hanami/rake_tasks'
-require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new(:spec)
-task default: :spec
+begin
+	require 'rspec/core/rake_task'
+
+	RSpec::Core::RakeTask.new(:spec)
+	task default: :spec
+rescue LoadError
+	# Cannot load RSpec rake tasks in Production
+end
